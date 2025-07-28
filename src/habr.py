@@ -13,7 +13,8 @@ class HabrNews():
 
     def pars_posts(self):
         url_post = f"{self._url}/flows/develop/posts/"
-        req = requests.get(url_post).text
+        for page in range(1, 50):
+            req = requests.get(f"{url_post}/page{page}/").text
         soup = BeautifulSoup(req, "lxml")
 
         post_list = soup.find_all("div", class_="tm-post-snippet")
